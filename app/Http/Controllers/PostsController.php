@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Comment;
 
 class PostsController extends Controller
 {
@@ -36,4 +37,17 @@ class PostsController extends Controller
         //And then redirect to the home page
         return redirect('/');
     }
+    public function nigga()
+    {
+        return Post::with('comments')->get();
+    }
+
+    public function nigga2()
+    {
+        $posts = Post::with('comments')->get();
+        foreach ($posts as $post => $value) {
+            # code...
+        }
+    }
 }
+
