@@ -9,6 +9,7 @@ Route::get('/posts/nigga', 'PostsController@nigga');
 
 Route::get('/posts/{post}', 'PostsController@show');
 Route::post('/posts/{post}/comments', 'CommentsController@store');
+Route::delete('/posts/{post}', 'PostsController@deletepost');
 
 //Route::get('/posts/{post}', 'PostsController@show');
 

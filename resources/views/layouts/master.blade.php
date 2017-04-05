@@ -35,5 +35,6 @@
     </div>
 
     @include('layouts.footer')
+    @yield('scripts')
   </body>
 </html>

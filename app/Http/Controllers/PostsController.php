@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Comment;
+use Elasticsearch\ClientBuilder;
 
 class PostsController extends Controller
 {
+
+    private $client;
+
+    public function __construct()
+    {
+        $this->client = ClientBuilder::create()->build();
+    }
+
     public function index()
     {
         $posts = Post::latest()->get();
@@ -31,23 +40,31 @@ class PostsController extends Controller
             'body'  => 'required'
         ]);
 
-        Post::create(request(['title','body']));
+        $post = Post::create(request(['title','body']));
 
+        $this->client->index([
+            'index' => 'blog',
+            'type' => 'post',
+            'id' => $post->id,
+            'body' => [
+                'title' => $post->title,
+                'body' => $post->body
+            ]
+        ]);
 
         //And then redirect to the home page
         return redirect('/');
     }
-    public function nigga()
-    {
-        return Post::with('comments')->get();
-    }
 
-    public function nigga2()
+    public function deletepost(Post $post)
     {
-        $posts = Post::with('comments')->get();
-        foreach ($posts as $post => $value) {
-            # code...
-        }
+        $this->client->delete([
+            'index' => 'blog',
+            'type' => 'post',
+            'id' => $post->id
+        ]);
+        
+        $post->delete();
     }
 }
 

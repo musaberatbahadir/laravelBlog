@@ -35,10 +35,27 @@
 					<div class="form-group">
 						<div class="form-group"> 
 		  				<button type="submit" class="btn btn-primary">Add Comment</button>
+		  				<button type="button" class="btn btn-danger" id="delete-post">Delete Post</button>
 		 				 </div> 
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+@endsection
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+	$( document ).ready(function() {
+			$('#delete-post').click(function() {
+				$('#delete-post').prop('disabled', true);
+				axios.delete('/posts/{{ $post->id }}')
+				.then(function() {
+					window.location.href = '/'
+				});
+			});
+	})
+</script>
 @endsection
