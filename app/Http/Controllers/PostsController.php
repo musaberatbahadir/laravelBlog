@@ -47,8 +47,8 @@ class PostsController extends Controller
             'type' => 'post',
             'id' => $post->id,
             'body' => [
-                'title' => $post->title,
-                'body' => $post->body
+                'docTitle' => $post->title,
+                'docBody' => $post->body
             ]
         ]);
 
@@ -66,5 +66,47 @@ class PostsController extends Controller
         
         $post->delete();
     }
-}
 
+    public function updatePost(Post $post, Request $request)
+    {
+        $post->forceFill(
+            $request->only([
+                'title', 'body'
+            ])
+        )->save();
+
+        $this->client->index([
+            'index' => 'blog',
+            'type' => 'post',
+            'id' => $post->id,
+            'body' => [
+                'docTitle' => $post->title,
+                'docBody' => $post->body
+            ]
+        ]);
+    }
+
+    public function showUpdatePage(Post $post)
+    {
+        return view('posts.update',compact('post'));
+    }
+
+    public function search(Request $request)
+    {
+        $key = $request->input('q');
+        $params = [
+            'index' => 'blog',
+            'type' => 'post',
+            'body' => [
+                'query' => [
+                    'match' => [
+                        'docBody' => $key
+                    ]
+                ]
+            ]
+        ];
+
+        $results = $this->client->search($params);
+        dd($results);
+    }
+}

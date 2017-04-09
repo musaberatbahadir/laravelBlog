@@ -14,6 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -35,6 +36,19 @@
     </div>
 
     @include('layouts.footer')
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+      $( document ).ready(function() {
+        $('#btn-search').click(function() {
+          $('#btn-search').prop('disabled', true);
+          axios.get('/search?q=' + $('#search').val())
+          .then(function(response) {
+            window.location.href = '/search';
+          });
+        });
+      })
+    </script>
     @yield('scripts')
   </body>
 </html>

@@ -36,6 +36,7 @@
 						<div class="form-group"> 
 		  				<button type="submit" class="btn btn-primary">Add Comment</button>
 		  				<button type="button" class="btn btn-danger" id="delete-post">Delete Post</button>
+		  				<a href="/posts/{{ $post->id }}/update" type="button" class="btn btn-success">Update Post</a>
 		 				 </div> 
 					</div>
 				</form>
@@ -45,8 +46,6 @@
 @endsection
 
 @section('scripts')
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 	$( document ).ready(function() {
 			$('#delete-post').click(function() {
