@@ -10,13 +10,6 @@ use Elasticsearch\ClientBuilder;
 class PostsController extends Controller
 {
 
-    private $client;
-
-    public function __construct()
-    {
-        $this->client = ClientBuilder::create()->build();
-    }
-
     public function index()
     {
         $posts = Post::latest()->get();
@@ -39,10 +32,14 @@ class PostsController extends Controller
             'title' => 'required',
             'body'  => 'required'
         ]);
-
-        $post = Post::create(request(['title','body']));
-
-        $this->client->index([
+        try {
+            $post = Post::create(request(['title','body']));
+        } catch (Exception $e) {
+            Log::error("PostsController/Given title and body couldnt take a post", (array) $e);
+        }
+        $client = ClientBuilder::create()->build();
+        try {
+            $client->index([
             'index' => 'blog',
             'type' => 'post',
             'id' => $post->id,
@@ -51,19 +48,27 @@ class PostsController extends Controller
                 'docBody' => $post->body
             ]
         ]);
-
+        } catch (Exception $e) {
+            Log::error("PostsController/Given title and body couldnt index", (array) $e);
+        }
+        
         //And then redirect to the home page
         return redirect('/');
     }
 
-    public function deletepost(Post $post)
+    public function deletePost(Post $post)
     {
-        $this->client->delete([
+        $client = ClientBuilder::create()->build();
+        try {
+            $client->delete([
             'index' => 'blog',
             'type' => 'post',
             'id' => $post->id
         ]);
-        
+        } catch (Exception $e) {
+            Log::error("PostsController/Couldnt delete from elasticsearch server", (array) $e);
+        }
+                
         $post->delete();
     }
 
@@ -74,8 +79,9 @@ class PostsController extends Controller
                 'title', 'body'
             ])
         )->save();
-
-        $this->client->index([
+        $client = ClientBuilder::create()->build();
+        try {
+            $client->index([
             'index' => 'blog',
             'type' => 'post',
             'id' => $post->id,
@@ -84,6 +90,10 @@ class PostsController extends Controller
                 'docBody' => $post->body
             ]
         ]);
+        } catch (Exception $e) {
+            Log::error("PostsController/There is an error when you try to index while updating", (array) $e);
+        }
+        
     }
 
     public function showUpdatePage(Post $post)
@@ -94,7 +104,9 @@ class PostsController extends Controller
     public function search(Request $request)
     {
         $key = $request->input('q');
-        $params = [
+
+        try {
+            $params = [
             'index' => 'blog',
             'type' => 'post',
             'body' => [
@@ -105,8 +117,13 @@ class PostsController extends Controller
                 ]
             ]
         ];
-
-        $results = $this->client->search($params);
+        $client = ClientBuilder::create()->build();
+        $results = $client->search($params);
+        } catch (Exception $e) {
+            Log::error("PostsController/Searching error occured", (array) $e);
+        }
+                
         dd($results);
+
     }
 }

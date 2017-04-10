@@ -7,7 +7,7 @@ Route::post('/posts', 'PostsController@store');
 Route::get('/posts/create', 'PostsController@create');
 
 Route::get('/posts/{post}', 'PostsController@show');
-Route::delete('/posts/{post}', 'PostsController@deletepost');
+Route::delete('/posts/{post}', 'PostsController@deletePost');
 Route::put('/posts/{post}', 'PostsController@updatePost');
 Route::post('/posts/{post}/comments', 'CommentsController@store');
 Route::get('/posts/{post}/update', 'PostsController@showUpdatePage');
