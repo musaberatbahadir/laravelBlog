@@ -1,0 +1,77 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.1",
+        "title": "Musa API"
+    },
+    "host": "",
+    "basePath": "/",
+    "schemes": ["https"],
+    "tags": [
+        {
+            "name": "Posts",
+            "description": "All post operations"
+        },
+        {
+            "name": "Search",
+            "description": ""
+        }
+    ],
+    "paths": {
+        "/api/posts": {
+            "get": {
+                "summary": "Get all posts",
+                "description": "",
+                "operationId": "getPosts",
+                "tags": ["Posts"],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Posts information",
+                        "schema": {
+                            "$ref": "#/api/posts"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/post/{post}": {
+            "get": {
+                "summary": "Get a specific Post",
+                "description": "",
+                "operationId": "getPost",
+                "tags": ["Posts"],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "post",
+                        "in": "path",
+                        "description": "ID of post.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Post Information",
+                        "schema": {
+                            "$ref": "#/api/"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
