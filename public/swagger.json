@@ -6,7 +6,9 @@
     },
     "host": "",
     "basePath": "/",
-    "schemes": ["https"],
+    "schemes": [
+        "https"
+    ],
     "tags": [
         {
             "name": "Posts",
@@ -23,7 +25,9 @@
                 "summary": "Get all posts",
                 "description": "",
                 "operationId": "getPosts",
-                "tags": ["Posts"],
+                "tags": [
+                    "Posts"
+                ],
                 "consumes": [
                     "application/json"
                 ],
@@ -33,9 +37,12 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "Posts information",
+                        "description": "A list of posts",
                         "schema": {
-                            "$ref": "#/api/posts"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/post"
+                            }
                         }
                     }
                 }
@@ -46,7 +53,9 @@
                 "summary": "Get a specific Post",
                 "description": "",
                 "operationId": "getPost",
-                "tags": ["Posts"],
+                "tags": [
+                    "Posts"
+                ],
                 "consumes": [
                     "application/json"
                 ],
@@ -63,15 +72,39 @@
                     }
                 ],
                 "responses": {
-                    "200":{
-                        "description": "Post Information",
+                    "200": {
+                        "description": "A post to be returned",
                         "schema": {
-                            "$ref": "#/api/"
+                            "$ref": "#/definitions/post"
                         }
+                    }
+                }
+            }
+        },
+        "definitions": {
+            "post": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "array"
+                    },
+                    "created_at": {
+                        "type": "dateTime"
+                    },
+                    "updated_at": {
+                        "type": "dateTime"
                     }
                 }
             }
         }
     }
-    
 }
