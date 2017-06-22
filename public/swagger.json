@@ -4,7 +4,7 @@
         "version": "1.0.1",
         "title": "Musa API"
     },
-    "host": "https://sleepy-wave-41706.herokuapp.com",
+    "host": "sleepy-wave-41706.herokuapp.com",
     "basePath": "/api",
     "schemes": [
         "https"
