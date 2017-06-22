@@ -80,29 +80,29 @@
                     }
                 }
             }
-        },
-        "definitions": {
-            "post": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "body": {
-                        "type": "string"
-                    },
-                    "comment": {
-                        "type": "array"
-                    },
-                    "created_at": {
-                        "type": "dateTime"
-                    },
-                    "updated_at": {
-                        "type": "dateTime"
-                    }
+        }
+    },
+    "definitions": {
+        "post": {
+            "type": "string",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "body": {
+                    "type": "string"
+                },
+                "comment": {
+                    "type": "array"
+                },
+                "created_at": {
+                    "type": "dateTime"
+                },
+                "updated_at": {
+                    "type": "dateTime"
                 }
             }
         }
