@@ -4,7 +4,7 @@
         "version": "1.0.1",
         "title": "Musa API"
     },
-    "host": "",
+    "host": "https://sleepy-wave-41706.herokuapp.com",
     "basePath": "/",
     "schemes": [
         "https"
@@ -84,7 +84,7 @@
     },
     "definitions": {
         "post": {
-            "type": "string",
+            "type": "object",
             "properties": {
                 "id": {
                     "type": "integer"
@@ -99,10 +99,10 @@
                     "type": "array"
                 },
                 "created_at": {
-                    "type": "dateTime"
+                    "type": "string"
                 },
                 "updated_at": {
-                    "type": "dateTime"
+                    "type": "string"
                 }
             }
         }
