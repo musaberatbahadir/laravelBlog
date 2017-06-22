@@ -5,7 +5,7 @@
         "title": "Musa API"
     },
     "host": "https://sleepy-wave-41706.herokuapp.com",
-    "basePath": "/",
+    "basePath": "/api",
     "schemes": [
         "https"
     ],
@@ -20,7 +20,7 @@
         }
     ],
     "paths": {
-        "/api/posts": {
+        "/posts": {
             "get": {
                 "summary": "Get all posts",
                 "description": "",
@@ -48,7 +48,7 @@
                 }
             }
         },
-        "/api/post/{post}": {
+        "/post/{post}": {
             "get": {
                 "summary": "Get a specific Post",
                 "description": "",
