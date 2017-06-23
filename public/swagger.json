@@ -95,7 +95,7 @@
                 "body": {
                     "type": "string"
                 },
-                "comment": {
+                "comments": {
                     "type": "array"
                 },
                 "created_at": {
