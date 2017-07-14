@@ -46,10 +46,10 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => $host,
-            'database'  => $database,
-            'username'  => $username,
-            'password'  => $password,
+            'host'      => env('DB_HOST', $host),
+            'database'  => env('DB_DATABASE', $database),
+            'username'  => env('DB_USERNAME', $database),
+            'password'  => env('DB_PASSWORD', $database),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
