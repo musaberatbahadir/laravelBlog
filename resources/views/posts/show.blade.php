@@ -46,15 +46,15 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript">
-	$( document ).ready(function() {
-			$('#delete-post').click(function() {
-				$('#delete-post').prop('disabled', true);
-				axios.delete('/posts/{{ $post->id }}')
-				.then(function() {
-					window.location.href = '/'
+	<script type="text/javascript">
+		$( document ).ready(function() {
+				$('#delete-post').click(function() {
+					$('#delete-post').prop('disabled', true);
+					axios.delete('/posts/{{ $post->id }}')
+					.then(function() {
+						window.location.href = '/'
+					});
 				});
-			});
-	})
-</script>
+		})
+	</script>
 @endsection

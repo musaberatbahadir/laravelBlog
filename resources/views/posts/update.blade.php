@@ -23,15 +23,15 @@
 @stop
 
 @section('scripts')
-<script type="text/javascript">
-	$( document ).ready(function() {
-			$('#update-post').click(function() {
-				$('#update-post').prop('disabled', true);
-				axios.put('/posts/{{ $post->id }}', {title: $('#title').val(), body: $('#body').val()})
-				.then(function() {
-					window.location.href = '/posts/{{ $post->id }}';
+	<script type="text/javascript">
+		$( document ).ready(function() {
+				$('#update-post').click(function() {
+					$('#update-post').prop('disabled', true);
+					axios.put('/posts/{{ $post->id }}', {title: $('#title').val(), body: $('#body').val()})
+					.then(function() {
+						window.location.href = '/posts/{{ $post->id }}';
+					});
 				});
-			});
-	})
-</script>
+		})
+	</script>
 @stop
